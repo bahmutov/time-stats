@@ -13,6 +13,9 @@ function checkLabel (label) {
 const timings = {}
 console.time = function timeStats (label) {
   checkLabel(label)
+  if (!timings[label]) {
+    timings[label] = {}
+  }
   timings[label] = {
     started: process.hrtime()
   }

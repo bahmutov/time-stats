@@ -68,7 +68,8 @@
     "unit": "mocha src/*-spec.js",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "e2e": "NODE_PATH=.. node -r time-stats test/index.js",
-    "e2e:regular": "node test/index.js"
+    "e2e:regular": "node test/index.js",
+    "e2e:cover": "nyc node test/included.js; nyc report --reporter=html"
   },
   "devDependencies": {
     "ban-sensitive-files": "1.8.3",
@@ -77,9 +78,10 @@
     "license-checker": "5.1.2",
     "mocha": "2.5.3",
     "nsp": "2.6.1",
+    "nyc": "7.0.0",
     "pre-git": "3.10.0",
+    "semantic-release": "^4.3.5",
     "standard": "7.1.2",
-    "standard-format": "2.2.2",
-    "semantic-release": "^4.3.5"
+    "standard-format": "2.2.2"
   }
 }
