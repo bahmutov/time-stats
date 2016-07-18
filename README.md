@@ -10,8 +10,6 @@
 
 If you have Node code that measures individual actions using `console.time` and `console.timeEnd`
 calls, you might want to know actual stats, like the median of the calls, min, max, mean.
-But you don't want to change your code to do this. Just preload `time-stats` and you will get
-this information.
 
 ```js
 function timeDelay (ms) {
@@ -24,8 +22,6 @@ function timeDelay (ms) {
 // calling delay 5 times
 ```
 
-before
-
 ```sh
 node test/index.js
 delay: 107.262ms
@@ -35,9 +31,13 @@ delay: 104.093ms
 delay: 105.262ms
 ```
 
-after
 
-```
+## Install and use
+
+You can change logic and get statistics without changing any code. 
+Just preload `time-stats` and you will get this information.
+
+```sh
 npm i time-stats
 node -r time-stats test/index.js
 delay: 107.673ms, min 107.673ms max 107.673ms median 107.673ms mean 107.673ms n=1
@@ -45,6 +45,17 @@ delay: 103.482ms, min 103.482ms max 107.673ms median 107.673ms mean 105.578ms n=
 delay: 102.874ms, min 102.874ms max 107.673ms median 103.482ms mean 104.677ms n=3
 delay: 101.869ms, min 101.869ms max 107.673ms median 103.482ms mean 103.975ms n=4
 delay: 103.503ms, min 101.869ms max 107.673ms median 103.482ms mean 103.88ms n=5
+```
+
+If you want to always have the above information, load this module before anything else
+
+```sh
+npm i -S time-stats
+```
+
+```js
+require('time-stats')
+// the rest of your code
 ```
 
 ### Small print
