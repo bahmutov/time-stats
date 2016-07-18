@@ -37,11 +37,12 @@ console.timeEnd = function timeEndStats (label) {
 
   const s = stats(timings[label].measurements)
   const resolution = 3
-  console.log('%s: %dms, min %dms max %dms median %dms n=%d',
+  console.log('%s: %dms, min %dms max %dms median %dms mean %dms n=%d',
     label,
     ms.toFixed(resolution),
     s.min.toFixed(resolution),
     s.max.toFixed(resolution),
     s.median.toFixed(resolution),
+    s.mean.toFixed(resolution),
     timings[label].measurements.length)
 }

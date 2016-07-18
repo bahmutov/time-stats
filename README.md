@@ -8,6 +8,45 @@
 [![semantic-release][semantic-image] ][semantic-url]
 [![js-standard-style][standard-image]][standard-url]
 
+If you have Node code that measures individual actions using `console.time` and `console.timeEnd`
+calls, you might want to know actual stats, like the median of the calls, min, max, mean.
+But you don't want to change your code to do this. Just preload `time-stats` and you will get
+this information.
+
+```js
+function timeDelay (ms) {
+  const label = 'delay'
+  console.time(label)
+  return delay(100).then(() => {
+    console.timeEnd(label)
+  })
+}
+// calling delay 5 times
+```
+
+before
+
+```sh
+node test/index.js
+delay: 107.262ms
+delay: 105.148ms
+delay: 104.336ms
+delay: 104.093ms
+delay: 105.262ms
+```
+
+after
+
+```
+npm i -g time-stats
+node -r time-stats test/index.js
+delay: 107.673ms, min 107.673ms max 107.673ms median 107.673ms mean 107.673ms n=1
+delay: 103.482ms, min 103.482ms max 107.673ms median 107.673ms mean 105.578ms n=2
+delay: 102.874ms, min 102.874ms max 107.673ms median 103.482ms mean 104.677ms n=3
+delay: 101.869ms, min 101.869ms max 107.673ms median 103.482ms mean 103.975ms n=4
+delay: 103.503ms, min 101.869ms max 107.673ms median 103.482ms mean 103.88ms n=5
+```
+
 ### Small print
 
 Author: Gleb Bahmutov &lt;gleb.bahmutov@gmail.com&gt; &copy; 2016

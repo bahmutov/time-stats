@@ -6,7 +6,7 @@ const is = require('check-more-types')
 /* global describe, it */
 describe('stats', () => {
   const stats = require('./stats')
-  const numbers = [1, 10, 3, 4, 6]
+  const numbers = [1, 10, 3, 4, 7]
 
   it('is a function', () => {
     la(is.fn(stats))
@@ -30,5 +30,10 @@ describe('stats', () => {
   it('computes median', () => {
     const s = stats(numbers)
     la(s.median === 4, s)
+  })
+
+  it('computes mean (average)', () => {
+    const s = stats(numbers)
+    la(s.mean === 5, s)
   })
 })
