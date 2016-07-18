@@ -9,8 +9,17 @@ function delay (ms) {
   })
 }
 
-const label = 'delay'
-console.time(label)
-delay(100).then(() => {
-  console.timeEnd(label)
-})
+function timeDelay (ms) {
+  const label = 'delay'
+  console.time(label)
+  return delay(100).then(() => {
+    console.timeEnd(label)
+  })
+}
+
+const delay100 = timeDelay.bind(null, 100)
+timeDelay()
+  .then(timeDelay)
+  .then(timeDelay)
+  .then(timeDelay)
+  .then(timeDelay)
