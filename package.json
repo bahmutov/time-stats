@@ -15,7 +15,8 @@
         "echo timing using regular console.time",
         "npm run e2e:regular",
         "echo timing time-stats console.time",
-        "npm run e2e"
+        "npm run e2e",
+        "npm run e2e:cover"
       ],
       "pre-push": [
         "npm run secure",
@@ -69,7 +70,7 @@
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "e2e": "NODE_PATH=.. node -r time-stats test/index.js",
     "e2e:regular": "node test/index.js",
-    "e2e:cover": "nyc node test/included.js; nyc report --reporter=html"
+    "e2e:cover": "nyc --check-coverage --lines 80 node test/included.js; nyc report --reporter=html"
   },
   "devDependencies": {
     "ban-sensitive-files": "1.8.3",
