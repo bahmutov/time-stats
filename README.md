@@ -38,7 +38,7 @@ delay: 105.262ms
 after
 
 ```
-npm i -g time-stats
+npm i time-stats
 node -r time-stats test/index.js
 delay: 107.673ms, min 107.673ms max 107.673ms median 107.673ms mean 107.673ms n=1
 delay: 103.482ms, min 103.482ms max 107.673ms median 107.673ms mean 105.578ms n=2
