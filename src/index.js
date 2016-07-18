@@ -10,15 +10,17 @@ function checkLabel (label) {
   }
 }
 
+const stats = require('./stats')
+
 const timings = {}
 console.time = function timeStats (label) {
   checkLabel(label)
   if (!timings[label]) {
-    timings[label] = {}
+    timings[label] = {
+      measurements: []
+    }
   }
-  timings[label] = {
-    started: process.hrtime()
-  }
+  timings[label].started = process.hrtime()
 }
 
 console.timeEnd = function timeEndStats (label) {
@@ -30,5 +32,16 @@ console.timeEnd = function timeEndStats (label) {
   const seconds = elapsed[0]
   const nanoseconds = elapsed[1]
   const ms = seconds * 1e3 + nanoseconds / 1e6
-  console.log('%s: %dms', label, ms.toFixed(3))
+
+  timings[label].measurements.push(ms)
+
+  const s = stats(timings[label].measurements)
+  const resolution = 3
+  console.log('%s: %dms, min %dms max %dms median %dms n=%d',
+    label,
+    ms.toFixed(resolution),
+    s.min.toFixed(resolution),
+    s.max.toFixed(resolution),
+    s.median.toFixed(resolution),
+    timings[label].measurements.length)
 }
