@@ -10,6 +10,19 @@ function checkLabel (label) {
   }
 }
 
+function trendArrow (duration, mean) {
+  const upTriangle = '▲'
+  const downTriangle = '▼'
+  const noChange = '∼'
+  if (duration < mean) {
+    return downTriangle
+  }
+  if (duration > mean) {
+    return upTriangle
+  }
+  return noChange
+}
+
 const stats = require('./stats')
 
 const timings = {}
@@ -36,9 +49,11 @@ console.timeEnd = function timeEndStats (label) {
   timings[label].measurements.push(ms)
 
   const s = stats(timings[label].measurements)
+  const trend = trendArrow(ms, s.mean)
   const resolution = 3
-  console.log('%s: %dms, min %dms max %dms median %dms mean %dms n=%d',
+  console.log('%s: %s %dms, min %dms max %dms median %dms mean %dms n=%d',
     label,
+    trend,
     ms.toFixed(resolution),
     s.min.toFixed(resolution),
     s.max.toFixed(resolution),
